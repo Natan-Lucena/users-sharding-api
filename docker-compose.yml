@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # Porta para conexão
+      - "15672:15672" # Interface de gerenciamento
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+
+  shard1:
+    image: postgres:latest
+    container_name: shard1
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: shard1
+    ports:
+      - "5433:5432"
+
+  shard2:
+    image: postgres:latest
+    container_name: shard2
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: shard2
+    ports:
+      - "5434:5432"
+
+  shard3:
+    image: postgres:latest
+    container_name: shard3
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: shard3
+    ports:
+      - "5435:5432"
+
+  shard4:
+    image: postgres:latest
+    container_name: shard4
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: shard4
+    ports:
+      - "5436:5432"

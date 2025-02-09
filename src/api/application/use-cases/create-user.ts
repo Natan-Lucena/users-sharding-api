@@ -25,7 +25,7 @@ export class CreateUserUseCase {
       return failure("USER_ALREADY_EXISTS");
     }
 
-    const hashedPassword = hash(data.password, 10);
+    const hashedPassword = await hash(data.password, 10);
     const user = User.create({
       email: data.email,
       name: data.name,

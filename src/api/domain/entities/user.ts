@@ -1,4 +1,4 @@
-import { Uuid } from "../shared/core/uuid";
+import { Uuid } from "../../shared/core/uuid";
 
 interface ICreateUser {
   id?: Uuid;

@@ -8,7 +8,7 @@ export interface ISearchUser {
 }
 
 export interface IUserRepository {
-  create(user: User): Promise<void>;
+  create(user: User): Promise<User>;
   update(user: User): Promise<void>;
   search(search: ISearchUser): Promise<User | null>;
   getById(id: Uuid): Promise<User | null>;

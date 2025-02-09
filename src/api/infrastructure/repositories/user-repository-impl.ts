@@ -30,12 +30,12 @@ export class UserRepositoryImpl implements IUserRepository {
     await this.redisClient.saveCache(user.id.toString(), userUpdated);
   }
 
-  async create(user: User): Promise<void> {
+  async create(user: User): Promise<User> {
     const userShard = this.generateShard(user.id);
 
     const prisma = await this.prismaShards.getShard(userShard);
 
-    await prisma.user.create({
+    const result = await prisma.user.create({
       data: {
         id: user.id.toString(),
         email: user.email,
@@ -43,10 +43,15 @@ export class UserRepositoryImpl implements IUserRepository {
         taxId: user.taxId,
       },
     });
-    await this.redisClient.saveCache(user.taxId, user);
-    await this.redisClient.saveCache(user.email, user);
-    await this.redisClient.saveCache(user.id.toString(), user);
-    await this.redisClient.setIndex(user.name, user.id.toString(), userShard);
+    await this.redisClient.saveCache(result.taxId, result);
+    await this.redisClient.saveCache(result.email, result);
+    await this.redisClient.saveCache(result.id.toString(), result);
+    await this.redisClient.setIndex(
+      result.name,
+      result.id.toString(),
+      userShard
+    );
+    return this.mapToDomain(result);
   }
   async search(search: ISearchUser): Promise<User | null> {
     if (search.email) {

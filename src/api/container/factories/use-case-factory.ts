@@ -1,9 +1,9 @@
 import Redis from "ioredis";
 import { UserRepositoryImpl } from "../../infrastructure/repositories/user-repository-impl";
 import { PrismaShards } from "../../infrastructure/database/prisma";
-import { PrismaClient } from "@prisma/client/extension";
 import { RedisClient } from "../../infrastructure/database/redis";
 import { CreateUserUseCase } from "../../application/use-cases/create-user";
+import { PrismaClient } from "@prisma/client";
 
 const redis = new Redis(process.env.REDIS_URL as string);
 const redisClient = new RedisClient(redis);

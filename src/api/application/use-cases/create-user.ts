@@ -2,6 +2,7 @@ import { User } from "../../domain/entities/user";
 import { IUserRepository } from "../../domain/repositories/user-repository";
 import { failure, Result, success } from "../../shared/core/result";
 import { hash } from "bcrypt";
+import { UserDto } from "../dtos/user-dto";
 
 interface ICreateUser {
   email: string;
@@ -15,7 +16,7 @@ export class CreateUserUseCase {
 
   async execute(
     data: ICreateUser
-  ): Promise<Result<User, "USER_ALREADY_EXISTS">> {
+  ): Promise<Result<UserDto, "USER_ALREADY_EXISTS">> {
     const userAlreadyExists = await this.repository.search({
       email: data.email,
       taxId: data.taxId,
@@ -33,6 +34,12 @@ export class CreateUserUseCase {
       taxId: data.taxId,
     });
     const result = await this.repository.create(user);
-    return success(result);
+    return success({
+      id: result.id.value,
+      name: result.name,
+      email: result.email,
+      taxId: result.taxId,
+      createdAt: result.createdAt,
+    });
   }
 }

@@ -21,7 +21,10 @@ export class CreateUserController extends BaseController {
     const result = await this.useCase.execute(payload);
 
     if (!result.ok) {
-      return this.clientError(res, result.error);
+      if (result.error === "USER_ALREADY_EXISTS") {
+        return this.clientError(res, result.error);
+      }
+      throw new Error(result.error);
     }
 
     return this.created(res, result.value);

@@ -32,7 +32,6 @@ export class UserRepositoryImpl implements IUserRepository {
 
   async create(user: User): Promise<User> {
     const userShard = this.generateShard(user.id);
-
     const prisma = await this.prismaShards.getShard(userShard);
 
     const result = await prisma.user.create({
@@ -41,6 +40,8 @@ export class UserRepositoryImpl implements IUserRepository {
         email: user.email,
         name: user.name,
         taxId: user.taxId,
+        password: user.password,
+        createdAt: user.createdAt,
       },
     });
     await this.redisClient.saveCache(result.taxId, result);

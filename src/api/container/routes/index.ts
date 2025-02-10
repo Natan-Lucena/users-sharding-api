@@ -5,6 +5,6 @@ const createUserController = ControllerFactory.createUserController();
 
 const router = Router();
 
-router.post("/users", createUserController.execute);
+router.post("/users", (req, res) => createUserController.execute(req, res));
 
 export { router };

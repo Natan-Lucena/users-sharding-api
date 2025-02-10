@@ -4,6 +4,7 @@ import { PrismaShards } from "../../infrastructure/database/prisma";
 import { RedisClient } from "../../infrastructure/database/redis";
 import { PrismaClient } from "@prisma/client";
 import { CreateUserUseCase } from "../../application/use-cases/create-user/create-user";
+import { UpdateUserProfilePictureUseCase } from "../../application/use-cases/update-user-profile-picture/update-user-profile-picture";
 
 const redis = new Redis(process.env.REDIS_URL as string);
 const redisClient = new RedisClient(redis);
@@ -27,5 +28,8 @@ const userRepository = new UserRepositoryImpl(redisClient, prismaShards);
 export class UseCaseFactory {
   static createUserUseCase(): CreateUserUseCase {
     return new CreateUserUseCase(userRepository);
+  }
+  static updateUserProfilePictureUseCase(): UpdateUserProfilePictureUseCase {
+    return new UpdateUserProfilePictureUseCase(userRepository);
   }
 }

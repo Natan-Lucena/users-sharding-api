@@ -1,12 +1,17 @@
 import amqp from "amqplib";
 import { Logger } from "../../shared/core/logger";
 import { PubSub } from "../../application/services/pub-sub";
+import { UpdateUserProfilePictureUseCase } from "../../application/use-cases/update-user-profile-picture/update-user-profile-picture";
+import { Uuid } from "../../shared/core/uuid";
 
 export class RabbitMQPubSub implements PubSub {
   private connection!: amqp.Connection;
   private channel!: amqp.Channel;
 
-  constructor(private readonly rabbitMQUrl: string) {}
+  constructor(
+    private readonly rabbitMQUrl: string,
+    private readonly updateUserProfilePictureUseCase: UpdateUserProfilePictureUseCase
+  ) {}
 
   private async connect(): Promise<void> {
     if (!this.connection) {
@@ -32,9 +37,13 @@ export class RabbitMQPubSub implements PubSub {
           console.log(
             `📩 Message received from channel"${channel}": ${messageContent}`
           );
+
           this.channel.ack(message);
           const messageObject = JSON.parse(messageContent);
-
+          this.updateUserProfilePictureUseCase.execute({
+            userId: messageObject.externalId,
+            profilePicture: messageObject.url,
+          });
           break;
         }
         default: {

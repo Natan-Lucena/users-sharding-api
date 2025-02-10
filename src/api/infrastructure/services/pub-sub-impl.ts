@@ -33,6 +33,8 @@ export class RabbitMQPubSub implements PubSub {
             `📩 Message received from channel"${channel}": ${messageContent}`
           );
           this.channel.ack(message);
+          const messageObject = JSON.parse(messageContent);
+
           break;
         }
         default: {

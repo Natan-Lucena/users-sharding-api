@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { BaseController } from "../../shared/infra/http/base-controller";
+import { BaseController } from "../../../shared/infra/http/base-controller";
 import { CreateUserUseCase } from "./create-user";
-import { registerUserSchema } from "../schemas/register-user.schema";
-import { formatValidationErrors } from "../../shared/core/validation-erros";
+import { registerUserSchema } from "../../schemas/register-user.schema";
+import { formatValidationErrors } from "../../../shared/core/validation-erros";
 
 export class CreateUserController extends BaseController {
   constructor(private useCase: CreateUserUseCase) {

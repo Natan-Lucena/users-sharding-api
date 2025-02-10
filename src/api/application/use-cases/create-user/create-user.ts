@@ -1,8 +1,8 @@
-import { User } from "../../domain/entities/user";
-import { IUserRepository } from "../../domain/repositories/user-repository";
-import { failure, Result, success } from "../../shared/core/result";
 import { hash } from "bcrypt";
-import { UserDto } from "../dtos/user-dto";
+import { IUserRepository } from "../../../domain/repositories/user-repository";
+import { UserDto } from "../../dtos/user-dto";
+import { failure, Result, success } from "../../../shared/core/result";
+import { User } from "../../../domain/entities/user";
 
 interface ICreateUser {
   email: string;

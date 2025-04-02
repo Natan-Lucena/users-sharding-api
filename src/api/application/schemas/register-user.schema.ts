@@ -14,4 +14,7 @@ export const registerUserSchema = z.object({
     .regex(new RegExp("^[0-9]+$"))
     .min(11)
     .max(14),
+  role: z.enum(["ADMIN", "USER"], {
+    invalid_type_error: validationErrors.enum(["ADMIN", "USER"]),
+  }),
 });

@@ -40,6 +40,17 @@ export class RabbitMQPubSub implements PubSub {
 
           this.channel.ack(message);
           const messageObject = JSON.parse(messageContent);
+          if (!messageObject.externalId || !messageObject.url) {
+            Logger.error("Error: Invalid message format.");
+            throw new Error("Invalid message format.");
+          }
+          if (
+            typeof messageObject.externalId !== "string" &&
+            typeof messageObject.externalId !== "string"
+          ) {
+            Logger.error("Error: Invalid message format.");
+            throw new Error("Invalid message format.");
+          }
           this.updateUserProfilePictureUseCase.execute({
             userId: messageObject.externalId,
             profilePicture: messageObject.url,

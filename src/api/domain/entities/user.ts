@@ -1,11 +1,13 @@
 import { Uuid } from "../../shared/core/uuid";
 
+type roleType = "ADMIN" | "USER";
 interface ICreateUser {
   id?: Uuid;
   createdAt?: Date;
   profilePictureUrl?: string;
   email: string;
   name: string;
+  role: roleType;
   password: string;
   taxId: string;
 }
@@ -18,6 +20,7 @@ export class User {
     private _password: string,
     private _taxId: string,
     readonly createdAt: Date,
+    readonly role: roleType,
     private _profilePictureUrl?: string
   ) {}
 
@@ -49,6 +52,7 @@ export class User {
       props.password,
       props.taxId,
       props.createdAt || new Date(),
+      props.role,
       props.profilePictureUrl
     );
   }

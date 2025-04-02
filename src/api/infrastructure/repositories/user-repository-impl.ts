@@ -23,6 +23,7 @@ export class UserRepositoryImpl implements IUserRepository {
         email: user.email,
         name: user.name,
         taxId: user.taxId,
+        role: user.role,
         profilePictureUrl: user.profilePictureUrl,
       },
     });
@@ -44,6 +45,7 @@ export class UserRepositoryImpl implements IUserRepository {
         taxId: user.taxId,
         password: user.password,
         createdAt: user.createdAt,
+        role: user.role,
       },
     });
     await this.redisClient.saveCache(result.taxId, result);
@@ -117,6 +119,7 @@ export class UserRepositoryImpl implements IUserRepository {
       password: user.password,
       taxId: user.taxId,
       createdAt: user.createdAt,
+      role: user.role,
       profilePictureUrl: user.profilePictureUrl ?? undefined,
     });
   }

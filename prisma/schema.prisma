@@ -13,12 +13,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
   id                String   @id
   email             String   @unique
   name              String
   password          String
   taxId             String
+  role              Role
   createdAt         DateTime
   profilePictureUrl String?
 }

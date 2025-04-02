@@ -9,6 +9,7 @@ interface ICreateUser {
   name: string;
   password: string;
   taxId: string;
+  role: "ADMIN" | "USER";
 }
 
 export class CreateUserUseCase {
@@ -32,6 +33,7 @@ export class CreateUserUseCase {
       name: data.name,
       password: hashedPassword,
       taxId: data.taxId,
+      role: data.role,
     });
     const result = await this.repository.create(user);
     return success({

@@ -118,7 +118,7 @@ export class UserRepositoryImpl implements IUserRepository {
       name: user.name,
       password: user.password,
       taxId: user.taxId,
-      createdAt: user.createdAt,
+      createdAt: new Date(user.createdAt),
       role: user.role,
       profilePictureUrl: user.profilePictureUrl ?? undefined,
     });

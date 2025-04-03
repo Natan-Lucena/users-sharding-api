@@ -32,4 +32,8 @@ export class UseCaseFactory {
   static updateUserProfilePictureUseCase(): UpdateUserProfilePictureUseCase {
     return new UpdateUserProfilePictureUseCase(userRepository);
   }
+
+  static getUserRepository() {
+    return userRepository;
+  }
 }

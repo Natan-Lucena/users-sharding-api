@@ -3,10 +3,14 @@ import { router } from "./api/container/routes";
 import "dotenv/config";
 import { RabbitMQPubSub } from "./api/infrastructure/services/pub-sub-impl";
 import { UseCaseFactory } from "./api/container/factories/use-case-factory";
+import { GrpcServer } from "./api/grpc/server";
 
 const app = express();
 app.use(express.json());
 app.use(router);
+
+const grpcServer = new GrpcServer();
+grpcServer.start();
 
 if (!process.env.RABBITMQ_URL) {
   throw new Error("Variável de ambiente RABBITMQ_URL não definida.");

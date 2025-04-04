@@ -5,6 +5,7 @@ import { RedisClient } from "../../infrastructure/database/redis";
 import { PrismaClient } from "@prisma/client";
 import { CreateUserUseCase } from "../../application/use-cases/create-user/create-user";
 import { UpdateUserProfilePictureUseCase } from "../../application/use-cases/update-user-profile-picture/update-user-profile-picture";
+import { SignInUserUseCase } from "../../application/use-cases/sign-in-user/sign-in-user";
 
 const redis = new Redis(process.env.REDIS_URL as string);
 const redisClient = new RedisClient(redis);
@@ -31,6 +32,12 @@ export class UseCaseFactory {
   }
   static updateUserProfilePictureUseCase(): UpdateUserProfilePictureUseCase {
     return new UpdateUserProfilePictureUseCase(userRepository);
+  }
+  static signInUserUseCase(): SignInUserUseCase {
+    return new SignInUserUseCase(
+      userRepository,
+      process.env.JWT_SECRET as string
+    );
   }
 
   static getUserRepository() {

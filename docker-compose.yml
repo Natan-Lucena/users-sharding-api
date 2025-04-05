@@ -57,3 +57,12 @@ services:
       POSTGRES_DB: shard4
     ports:
       - "5436:5432"
+  products-db:
+    image: postgres:latest
+    container_name: products-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: products
+    ports:
+      - "5437:5432"

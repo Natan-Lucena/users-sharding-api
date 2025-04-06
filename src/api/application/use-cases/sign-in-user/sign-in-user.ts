@@ -31,7 +31,7 @@ export class SignInUserUseCase {
     if (!passwordMatch) {
       return failure("INVALID_PASSWORD");
     }
-    const token = jwt.sign({ id: user.id }, this.jwtSecret, {
+    const token = jwt.sign({ id: user.id.value }, this.jwtSecret, {
       expiresIn: "1h",
     });
 

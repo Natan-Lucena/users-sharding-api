@@ -69,4 +69,5 @@ $ /users/sign-in -> Post
 ```
 
 This application must run alongside this repository: https://github.com/Natan-Lucena/Rabbit-Image-Uploader
+
 This application must run alongside this repository: https://github.com/Natan-Lucena/products-go-api

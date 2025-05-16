@@ -6,7 +6,8 @@
   "scripts": {
     "test": "vitest",
     "start": "node dist/index",
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "build": "tsc"
   },
   "author": "Natan Lucena",
   "license": "MIT",

@@ -1,5 +1,5 @@
 import * as grpc from "@grpc/grpc-js";
-import { user } from "../../../generated/user";
+import { user } from "../../generated/user";
 import { UserServiceImplementation } from "./services/get-user-service";
 
 export class GrpcServer {

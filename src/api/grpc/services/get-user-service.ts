@@ -1,5 +1,5 @@
 import { ServerUnaryCall, sendUnaryData } from "@grpc/grpc-js";
-import { user } from "../../../../generated/user";
+import { user } from "../../../generated/user";
 import { UseCaseFactory } from "../../container/factories/use-case-factory";
 import { Uuid } from "../../shared/core/uuid";
 import { GrpcStatusCode } from "../consts";
